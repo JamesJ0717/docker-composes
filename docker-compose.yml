@@ -15,6 +15,21 @@ services:
       - traefik.http.routers.pveproxy-https.rule=Host(`pve.jamesjohnson.io`)
       - traefik.http.routers.pveproxy-https.entryPoints=websecure
       - traefik.http.routers.pveproxy-https.tls=true
+pve-proxy:
+    image: router-proxy
+    build: 
+      context: .
+      dockerfile: Dockerfile.router
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.router.rule=Host(`router.jamesjohnson.io`)
+      - traefik.http.routers.router.entryPoints=web
+      - traefik.http.routers.router.middlewares=redirect@file
+      - traefik.http.routers.router-https.rule=Host(`router.jamesjohnson.io`)
+      - traefik.http.routers.router-https.entryPoints=websecure
+      - traefik.http.routers.router-https.tls=true
 networks:
   web:
     external: true
