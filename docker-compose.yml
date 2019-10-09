@@ -13,7 +13,7 @@ services:
       - traefik.http.routers.pveproxy.entryPoints=web
       - traefik.http.routers.pveproxy.middlewares=redirect@file
       - traefik.http.routers.pveproxy-https.rule=Host(`pve.jamesjohnson.io`)
-      - traefik.http.routers.pveproxy-https.entryPoints=web-secure
+      - traefik.http.routers.pveproxy-https.entryPoints=websecure
       - traefik.http.routers.pveproxy-https.tls=true
 networks:
   web:
