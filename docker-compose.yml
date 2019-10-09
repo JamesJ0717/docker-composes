@@ -15,7 +15,7 @@ services:
       - traefik.http.routers.pveproxy-https.rule=Host(`pve.jamesjohnson.io`)
       - traefik.http.routers.pveproxy-https.entryPoints=websecure
       - traefik.http.routers.pveproxy-https.tls=true
-pve-proxy:
+  router-proxy:
     image: router-proxy
     build: 
       context: .
