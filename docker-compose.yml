@@ -3,7 +3,7 @@ services:
   pve-proxy:
     image: pve-proxy
     build: 
-      context: Dockerfiles/
+      context: .
       dockerfile: Dockerfile.pve
     networks:
       - web
