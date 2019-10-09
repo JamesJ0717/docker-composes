@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  pve-proxy:
+    image: pve-proxy
+    build: 
+      context: Dockerfiles/
+      dockerfile: Dockerfile.pve
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pveproxy.rule=Host(`pve.jamesjohnson.io`)
+      - traefik.http.routers.pveproxy.entryPoints=web
+      - traefik.http.routers.pveproxy.middlewares=redirect@file
+      - traefik.http.routers.pveproxy-https.rule=Host(`pve.jamesjohnson.io`)
+      - traefik.http.routers.pveproxy-https.entryPoints=web-secure
+      - traefik.http.routers.pveproxy-https.tls=true
+networks:
+  web:
+    external: true
