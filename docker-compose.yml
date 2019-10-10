@@ -1,35 +1,50 @@
-version: "3.5"
+version: '3.5'
 services:
-  pve-proxy:
-    image: pve-proxy
-    build: 
-      context: .
-      dockerfile: Dockerfile.pve
-    networks:
-      - web
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.pveproxy.rule=Host(`pve.jamesjohnson.io`)
-      - traefik.http.routers.pveproxy.entryPoints=web
-      - traefik.http.routers.pveproxy.middlewares=redirect@file
-      - traefik.http.routers.pveproxy-https.rule=Host(`pve.jamesjohnson.io`)
-      - traefik.http.routers.pveproxy-https.entryPoints=websecure
-      - traefik.http.routers.pveproxy-https.tls=true
-  router-proxy:
-    image: router-proxy
-    build: 
-      context: .
-      dockerfile: Dockerfile.router
-    networks:
-      - web
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.router.rule=Host(`router.jamesjohnson.io`)
-      - traefik.http.routers.router.entryPoints=web
-      - traefik.http.routers.router.middlewares=redirect@file
-      - traefik.http.routers.router-https.rule=Host(`router.jamesjohnson.io`)
-      - traefik.http.routers.router-https.entryPoints=websecure
-      - traefik.http.routers.router-https.tls=true
+    pve-proxy:
+        image: pve-proxy
+        build:
+            context: .
+            dockerfile: Dockerfile.pve
+        networks:
+            - web
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.pveproxy.rule=Host(`pve.jamesjohnson.io`)
+            - traefik.http.routers.pveproxy.entryPoints=web
+            - traefik.http.routers.pveproxy.middlewares=redirect@file
+            - traefik.http.routers.pveproxy-https.rule=Host(`pve.jamesjohnson.io`)
+            - traefik.http.routers.pveproxy-https.entryPoints=websecure
+            - traefik.http.routers.pveproxy-https.tls=true
+    router-proxy:
+        image: router-proxy
+        build:
+            context: .
+            dockerfile: Dockerfile.router
+        networks:
+            - web
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.router.rule=Host(`router.jamesjohnson.io`)
+            - traefik.http.routers.router.entryPoints=web
+            - traefik.http.routers.router.middlewares=redirect@file
+            - traefik.http.routers.router-https.rule=Host(`router.jamesjohnson.io`)
+            - traefik.http.routers.router-https.entryPoints=websecure
+            - traefik.http.routers.router-https.tls=true
+    vpn-proxy:
+        image: vpm-proxy
+        build:
+            context: .
+            dockerfile: Dockerfile.vpn
+        networks:
+            - web
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.vpn.rule=Host(`vpn.jamesjohnson.io`)
+            - traefik.http.routers.vpn.entryPoints=web
+            - traefik.http.routers.vpn.middlewares=redirect@file
+            - traefik.http.routers.vpn-https.rule=Host(`vpn.jamesjohnson.io`)
+            - traefik.http.routers.vpn-https.entryPoints=websecure
+            - traefik.http.routers.vpn-https.tls=true
 networks:
-  web:
-    external: true
+    web:
+        external: true
