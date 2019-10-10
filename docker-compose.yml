@@ -15,6 +15,7 @@ services:
             - traefik.http.routers.pveproxy-https.rule=Host(`pve.jamesjohnson.io`)
             - traefik.http.routers.pveproxy-https.entryPoints=websecure
             - traefik.http.routers.pveproxy-https.tls=true
+            - traefik.http.routers.pveproxy-https.tls.certresolver=myhttpchallenge
     router-proxy:
         image: router-proxy
         build:
@@ -30,6 +31,7 @@ services:
             - traefik.http.routers.router-https.rule=Host(`router.jamesjohnson.io`)
             - traefik.http.routers.router-https.entryPoints=websecure
             - traefik.http.routers.router-https.tls=true
+            - traefik.http.routers.router-https.tls.certresolver=myhttpchallenge
     vpn-proxy:
         image: vpm-proxy
         build:
@@ -45,6 +47,7 @@ services:
             - traefik.http.routers.vpn-https.rule=Host(`vpn.jamesjohnson.io`)
             - traefik.http.routers.vpn-https.entryPoints=websecure
             - traefik.http.routers.vpn-https.tls=true
+            - traefik.http.routers.vpn-https.tls.certresolver=myhttpchallenge
 networks:
     web:
         external: true
