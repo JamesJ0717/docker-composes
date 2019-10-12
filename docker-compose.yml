@@ -32,22 +32,6 @@ services:
             - traefik.http.routers.router-https.entryPoints=websecure
             - traefik.http.routers.router-https.tls=true
             - traefik.http.routers.router-https.tls.certresolver=myhttpchallenge
-    vpn-proxy:
-        image: vpm-proxy
-        build:
-            context: .
-            dockerfile: Dockerfile.vpn
-        networks:
-            - web
-        labels:
-            - traefik.enable=true
-            - traefik.http.routers.vpn.rule=Host(`vpn.jamesjohnson.io`)
-            - traefik.http.routers.vpn.entryPoints=web
-            - traefik.http.routers.vpn.middlewares=redirect@file
-            - traefik.http.routers.vpn-https.rule=Host(`vpn.jamesjohnson.io`)
-            - traefik.http.routers.vpn-https.entryPoints=websecure
-            - traefik.http.routers.vpn-https.tls=true
-            - traefik.http.routers.vpn-https.tls.certresolver=myhttpchallenge
 networks:
     web:
         external: true
