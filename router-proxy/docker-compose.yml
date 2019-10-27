@@ -2,9 +2,7 @@ version: '3.5'
 services:
     router-proxy:
         image: router-proxy
-        build:
-            context: .
-            dockerfile: Dockerfile.router
+        build: .
         networks:
             - web
         labels:

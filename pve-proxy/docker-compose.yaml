@@ -2,9 +2,7 @@ version: '3.5'
 services:
     pve-proxy:
         image: pve-proxy
-        build:
-            context: .
-            dockerfile: Dockerfile.pve
+        build: .
         networks:
             - web
         labels:
